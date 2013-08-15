@@ -18,26 +18,25 @@
 #
 
 #freshen up the apt repository, but not conflicting with the apt recipe
-execute("apt-get-update") do
+execute "apt-get update" do
   command "apt-get update"
   ignore_failure true
 end.run_action(:run)
 
-#turn off apparmor
-service("apparmor") { action [:stop,:disable] }
+#turn off services
+%w{'apparmor', 'whoopsie'}.each do |svc|
+  service svc do
+    action [:stop,:disable]
+    ignore_failure true
+  end
+end
 
 #turn off byobu
-file("/etc/profile.d/Z98-byobu") {
+file "/etc/profile.d/Z98-byobu" do
   action :delete
   not_if do
     node.recipe?("byobu")
   end
-}
-
-#turn off whoopsie (Ubuntu crash database submission daemon)
-service("whoopsie") do
-  action [:stop,:disable]
-  ignore_failure true
 end
 
 %w{popularity-contest unity-lens-shopping whoopsie}.each do |pkg|

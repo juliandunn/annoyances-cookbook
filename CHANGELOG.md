@@ -1,3 +1,6 @@
+## v0.4.1
+* ignore_failure added for byobu service
+
 ## v0.4.0
 * updated for Chef 11 (@alanthing)
 * fixed use of include? (@mikedillion)
