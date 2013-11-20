@@ -18,15 +18,19 @@
 #
 
 #delete any preexisting firewall rules
-execute("iptables -F") { ignore_failure true }.run_action(:run)
+if node['annoyances']['rhel']['delete_existing_firewall_rules'] == true
+  execute("iptables -F") { ignore_failure true }.run_action(:run)
+end
 
 #turn off SELinux
-if Mixlib::ShellOut.new("getenforce").run_command.stdout != "Disabled\n" then
+if node['annoyances']['rhel']['disable_selinux'] == true &&
+  Mixlib::ShellOut.new("getenforce").run_command.stdout != "Disabled\n" then
   execute("setenforce 0") { ignore_failure true }.run_action(:run)
 end
 
 #uninstall httpd
-if Mixlib::ShellOut.new("rpm -q httpd").run_command.status.success? then
+if node['annoyances']['rhel']['uninstall_httpd'] == true &&
+  Mixlib::ShellOut.new("rpm -q httpd").run_command.status.success? then
   execute "rpm --nodeps -e httpd" do
     ignore_failure true
     not_if do
@@ -36,7 +40,9 @@ if Mixlib::ShellOut.new("rpm -q httpd").run_command.status.success? then
 end
 
 #remove any .bash_logout
-file("/root/.bash_logout") { action :delete }
+if node['annoyances']['rhel']['remove_root_dot_bash_logout'] == true
+  file("/root/.bash_logout") { action :delete }
+end
 
 #disable the pile of desktop services that get turned on by default
 node['annoyances']['rhel']['services_to_disable'].each do |svc|

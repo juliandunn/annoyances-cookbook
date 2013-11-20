@@ -18,10 +18,12 @@
 #
 
 #freshen up the apt repository, but not conflicting with the apt recipe
-execute "apt-get update" do
-  command "apt-get update"
-  ignore_failure true
-end.run_action(:run)
+if node['annoyances']['debian']['perform_apt_get_update'] == true
+  execute "apt-get update" do
+    command "apt-get update"
+    ignore_failure true
+  end.run_action(:run)
+end
 
 #turn off services
 node['annoyances']['debian']['services_to_disable'].each do |svc|
@@ -34,6 +36,9 @@ end
 #turn off byobu
 file "/etc/profile.d/Z98-byobu" do
   action :delete
+  only_if do
+    node['annoyances']['debian']['disable_byobu'] == true
+  end
   not_if do
     node.recipe?("byobu")
   end
