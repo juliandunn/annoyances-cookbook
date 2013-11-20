@@ -39,7 +39,7 @@ end
 file("/root/.bash_logout") { action :delete }
 
 #disable the pile of desktop services that get turned on by default
-node['annoyances-cookbook']['rhel']['services_to_disable'].each do |svc|
+node['annoyances']['rhel']['services_to_disable'].each do |svc|
   service svc do
     action [:stop, :disable]
   end

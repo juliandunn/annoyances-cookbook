@@ -1,4 +1,4 @@
-default['annoyances-cookbook']['rhel']['services_to_disable'] = [
+default['annoyances']['rhel']['services_to_disable'] = [
   'autofs',
   'avahi-daemon',
   'bluetooth',
