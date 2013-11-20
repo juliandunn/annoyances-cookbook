@@ -1,3 +1,6 @@
+## v0.5.0
+* make 'services_to_disable' and 'packages_to_purge' configurable via attributes (@mgreensmith)
+
 ## v0.4.1
 * ignore_failure added for byobu service
 

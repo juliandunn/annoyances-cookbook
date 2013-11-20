@@ -24,7 +24,7 @@ execute "apt-get update" do
 end.run_action(:run)
 
 #turn off services
-%w{'apparmor', 'whoopsie'}.each do |svc|
+node['annoyances-cookbook']['debian']['services_to_disable'].each do |svc|
   service svc do
     action [:stop,:disable]
     ignore_failure true
@@ -39,7 +39,7 @@ file "/etc/profile.d/Z98-byobu" do
   end
 end
 
-%w{popularity-contest unity-lens-shopping whoopsie}.each do |pkg|
+node['annoyances-cookbook']['debian']['packages_to_purge'].each do |pkg|
   package pkg do
     action :purge
     ignore_failure true
