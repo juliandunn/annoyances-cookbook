@@ -56,6 +56,11 @@ if this ever got on a server.
 
 Just calls `::debian`.
 
+## omnios
+
+Includes `annoyances::omnios`, which refreshes the package list and
+publisher metadata.
+
 Usage
 =====
 
@@ -68,10 +73,11 @@ the `default` recipe.
 License and Author
 ==================
 
-Author:: Matt Ray (<matt@opscode.com>)
-Author:: Joshua Timberman (<joshua@opscode.com>)
+Author:: Matt Ray (<matt@getchef.com>)
+Author:: Joshua Timberman (<joshua@getchef.com>)
 
 Copyright 2012-2013 Opscode, Inc.
+Copyright 2013 Chef Software, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.

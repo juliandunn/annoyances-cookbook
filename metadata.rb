@@ -1,10 +1,9 @@
 name             "annoyances"
-maintainer       "Opscode, Inc."
-maintainer_email "matt@opscode.com"
+maintainer       "Matt Ray"
+maintainer_email "matt@getchef.com"
 license          "Apache 2.0"
 description      "Removes assorted operating system annoyances."
-long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
-version          "0.5.0"
+version          "0.4.3"
 
 %w{ debian fedora redhat ubuntu }.each do |os|
   supports os

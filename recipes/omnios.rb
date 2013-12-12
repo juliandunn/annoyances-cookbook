@@ -16,6 +16,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-execute "pkg refresh --full" do
-  ignore_failure true
+
+if node['annoyances']['omnios']['perform_pkg_refresh']
+  execute "pkg refresh --full" do
+    ignore_failure true
+  end
 end

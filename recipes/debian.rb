@@ -3,6 +3,7 @@
 # Recipe:: debian
 #
 # Copyright 2012-2013, Opscode, Inc.
+# Copyright 2013, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +19,7 @@
 #
 
 #freshen up the apt repository, but not conflicting with the apt recipe
-if node['annoyances']['debian']['perform_apt_get_update'] == true
+if node['annoyances']['debian']['perform_apt_get_update']
   execute "apt-get update" do
     command "apt-get update"
     ignore_failure true
@@ -37,7 +38,7 @@ end
 file "/etc/profile.d/Z98-byobu" do
   action :delete
   only_if do
-    node['annoyances']['debian']['disable_byobu'] == true
+    node['annoyances']['debian']['disable_byobu']
   end
   not_if do
     node.recipe?("byobu")

@@ -3,6 +3,7 @@
 # Recipe:: rhel
 #
 # Copyright 2012-2013, Opscode, Inc.
+# Copyright 2013, Chef Software, Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,18 +19,18 @@
 #
 
 #delete any preexisting firewall rules
-if node['annoyances']['rhel']['delete_existing_firewall_rules'] == true
+if node['annoyances']['rhel']['delete_existing_firewall_rules']
   execute("iptables -F") { ignore_failure true }.run_action(:run)
 end
 
 #turn off SELinux
-if node['annoyances']['rhel']['disable_selinux'] == true &&
+if node['annoyances']['rhel']['disable_selinux'] &&
   Mixlib::ShellOut.new("getenforce").run_command.stdout != "Disabled\n" then
   execute("setenforce 0") { ignore_failure true }.run_action(:run)
 end
 
 #uninstall httpd
-if node['annoyances']['rhel']['uninstall_httpd'] == true &&
+if node['annoyances']['rhel']['uninstall_httpd'] &&
   Mixlib::ShellOut.new("rpm -q httpd").run_command.status.success? then
   execute "rpm --nodeps -e httpd" do
     ignore_failure true
@@ -40,7 +41,7 @@ if node['annoyances']['rhel']['uninstall_httpd'] == true &&
 end
 
 #remove any .bash_logout
-if node['annoyances']['rhel']['remove_root_dot_bash_logout'] == true
+if node['annoyances']['rhel']['remove_root_dot_bash_logout']
   file("/root/.bash_logout") { action :delete }
 end
 

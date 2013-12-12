@@ -1,6 +1,3 @@
-## v0.5.0
-* make everything configurable via attributes (@mgreensmith)
-
 ## v0.4.1
 * ignore_failure added for byobu service
 
