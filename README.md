@@ -11,10 +11,11 @@ Requirements
 
 ## Platform
 
-Supports both `rhel` and `debian` platform families.
+Supports `rhel`, `debian`, and `omnios` platform families.
 
 * Debian, Ubuntu
 * Red Hat, CentOS, Scientific, Oracle, Amazon, Fedora
+* OmniOS
 
 If your Chef/Ohai version aren't new enough for the
 `node['platform_family']` attribute, then simply include the
@@ -23,11 +24,9 @@ platform-specific recipe.
 Recipes
 =======
 
-default
--------
+## default
 
-Looks at the node's `platform_family` and includes the proper recipe,
-then removes `annoyances` from the node's run list on completion.
+Looks at the node's `platform_family` and includes the proper recipe.
 
 If the node's `platform_family` is not found, an exception will be
 raised.
@@ -44,7 +43,7 @@ removed.
 
 ## fedora
 
-Just calls `::rhel`.
+Includes `annoyances::rhel`.
 
 ## debian
 
@@ -54,7 +53,7 @@ if this ever got on a server.
 
 ## ubuntu
 
-Just calls `::debian`.
+Includes `annoyances::debian`.
 
 ## omnios
 
@@ -65,10 +64,8 @@ Usage
 =====
 
 Include the `annoyances` recipe in your run list and it will make the
-various changes, then remove itself from the node's run list on
-completion. If you want to keep enforcing the `annoyances` with each
-run, directly include the operating system-specific recipe instead of
-the `default` recipe.
+various changes based on the node's platform family. You can also
+include the platform specific recipe directly.
 
 License and Author
 ==================
@@ -77,7 +74,7 @@ Author:: Matt Ray (<matt@getchef.com>)
 Author:: Joshua Timberman (<joshua@getchef.com>)
 
 Copyright 2012-2013 Opscode, Inc.
-Copyright 2013 Chef Software, Inc.
+Copyright 2013-2014 Chef Software, Inc.
 
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
