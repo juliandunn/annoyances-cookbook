@@ -11,11 +11,12 @@ Requirements
 
 ## Platform
 
-Supports `rhel`, `debian`, and `omnios` platform families.
+Supports `rhel`, `debian`, `omnios` and `windows` platform families.
 
 * Debian, Ubuntu
 * Red Hat, CentOS, Scientific, Oracle, Amazon, Fedora
 * OmniOS
+* Windows
 
 If your Chef/Ohai version aren't new enough for the
 `node['platform_family']` attribute, then simply include the
@@ -59,6 +60,12 @@ Includes `annoyances::debian`.
 
 Includes `annoyances::omnios`, which refreshes the package list and
 publisher metadata.
+
+## windows
+
+Disables User Account Control (UAC) and turns off Internet Explorer
+Enhanced Security Configuration (ESC) for administrators. Optionally turns
+off ESC if an extra attribute is set.
 
 Usage
 =====

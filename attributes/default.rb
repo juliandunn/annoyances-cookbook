@@ -19,3 +19,6 @@ default['annoyances']['rhel']['services_to_disable'] = [
   'haldaemon',
   'messagebus'
 ]
+
+default['annoyances']['windows']['disable_ie_for_admins'] = true
+default['annoyances']['windows']['disable_ie_for_users']  = false
