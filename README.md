@@ -63,7 +63,8 @@ publisher metadata.
 
 ## windows
 
-Disables User Account Control (UAC) and turns off Internet Explorer
+Disables User Account Control (UAC), disables Server Manager on logon,
+disables Shutdown Tracker, and turns off Internet Explorer
 Enhanced Security Configuration (ESC) for administrators. Optionally turns
 off ESC if an extra attribute is set.
 

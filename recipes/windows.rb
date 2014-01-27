@@ -37,6 +37,36 @@ registry_key 'HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System' do
   }]
 end
 
+# disable Server Manager on boot
+registry_key 'HKLM\Software\Microsoft\ServerManager\Oobe' do
+  values [
+    {
+    :name => 'DoNotOpenInitialConfigurationTasksAtLogon',
+    :type => :dword,
+    :data => 1
+  }]
+end
+
+registry_key 'HKLM\Software\Microsoft\ServerManager' do
+  values [
+    {
+    :name => 'DoNotOpenServerManagerAtLogon',
+    :type => :dword,
+    :data => 1
+  }]
+end
+
+# disable Shutdown Tracker
+registry_key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Reliability' do
+  values [
+    {
+      :name => 'ShutdownReasonUI',
+      :type => :dword,
+      :data => 0
+    }
+  ]
+end
+
 # disable IE Enhanced Security for admins
 if node['annoyances']['windows']['disable_ie_for_admins']
   registry_key 'HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Active Setup\Installed Components\{A509B1A7-37EF-4b3f-8CFC-4F3A74704073}' do
